@@ -31,32 +31,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Cors
-
 app.use(cors({
   origin: ['http://localhost:3000','https://messagesanitizer.herokuapp.com']
 }));
 
 
 // Express View engine setup
-
 app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
       
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-
-
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
-
+app.locals.title = 'Message Sanitizer API';
 
 const index = require('./routes/index');
 const authRouter = require('./routes/auth')
@@ -68,6 +61,5 @@ app.use('/api/auth', authRouter);
 app.all('*', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 })
-
 
 module.exports = app;
